@@ -12,7 +12,7 @@ function do_offset() {
   hrs=`echo $base_time | cut -f 1 -d ':' | sed 's/^0*//'`
   [ -z $mins ] && hrs=0
 
-  mins=`echo $base_time | cut -f 2 -d ':' | sed 's/^0*//'; [ -z $mins ] && mins=0`
+  mins=`echo $base_time | cut -f 2 -d ':' | sed 's/^0*//'`
   [ -z $mins ] && mins=0
 
   secs1=`echo $base_time | cut -f 3 -d ':' | cut -f 1 -d ,`
