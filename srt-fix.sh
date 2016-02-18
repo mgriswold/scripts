@@ -8,7 +8,7 @@ offset="$2"
 
 newfile="new-$srtfile"
 
-rm "$newfile"
+[ -f "$newfile" ] && rm "$newfile"
 
 function do_offset() {
   hrs=`echo $base_time | cut -f 1 -d ':' | sed 's/^0*//'`
