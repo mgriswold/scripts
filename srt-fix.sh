@@ -19,7 +19,7 @@ function do_offset() {
   secs2=`echo $base_time | cut -f 3 -d ':' | cut -f 2 -d ,`
   secs=${secs1}${secs2}
   secs=$(echo $secs | sed 's/^0*//')
-  secs=$((secs + 4500))
+  secs=$((secs + $offset))
 
   if [ $secs -gt 60000 ]; then
     secs=$(($secs - 60000))
