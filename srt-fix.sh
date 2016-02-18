@@ -6,7 +6,9 @@ titlecount=0
 srtfile="$1"
 offset="$2"
 
-rm "new-$srtfile"
+newfile="new-$srtfile"
+
+rm "$newfile"
 
 function do_offset() {
   hrs=`echo $base_time | cut -f 1 -d ':' | sed 's/^0*//'`
@@ -49,7 +51,7 @@ while read srtline; do
   if [ $blockcount = 1 ]; then
     echo "$srtline"
     titlecount=$((titlecount + 1))
-    echo "$titlecount" >> "new-$srtfile"
+    echo "$titlecount" >> "$newfile"
   fi
 
   if [ $blockcount = 2 ]; then
@@ -62,14 +64,14 @@ while read srtline; do
     base_time=$end_time
     end_time=$(do_offset)
 
-    echo "$begin_time --> $end_time" >> new-$srtfile
+    echo "$begin_time --> $end_time" >> $newfile
   fi
 
   if [ $blockcount -ge 3 ]; then
     if [[ "$srtline" != "" ]]; then
-      echo "$srtline" >> "new-$srtfile"
+      echo "$srtline" >> "$newfile"
     else
-      echo '' >> "new-$srtfile"
+      echo '' >> "$newfile"
       blockcount=0
     fi
   fi
