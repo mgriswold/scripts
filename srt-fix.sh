@@ -39,6 +39,7 @@ function do_offset() {
   fi
 
   secs=`echo "$secs" | sed 's/^\(.\{2\}\)/\1,/'`
+  echo "0${hrs}:${mins}:${secs}"
 }
 
 while read srtline; do
@@ -54,12 +55,13 @@ while read srtline; do
   if [ $blockcount = 2 ]; then
     begin_time=`echo $srtline | cut -f 1 -d ' '`
     end_time=`echo $srtline | cut -f 3 -d ' ' | cut -f 1 -d `
+
     base_time=$begin_time
-    do_offset
-    begin_time="0${hrs}:${mins}:${secs}"
+    begin_time=$(do_offset)
+
     base_time=$end_time
-    do_offset
-    end_time="0${hrs}:${mins}:${secs}"
+    end_time=$(do_offset)
+
     echo "$begin_time --> $end_time" >> new-$srtfile
   fi
 
